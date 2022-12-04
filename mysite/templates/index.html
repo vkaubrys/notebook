@@ -10,9 +10,9 @@
 <nav class="navbar is-dark">
     <div class="navbar-brand">
         <a href="{% url 'index' %}" class="navbar-item">Notes</a>
-        <a href="" class="navbar-item">Login</a>
-        <a href="" class="navbar-item">Logout</a>
-        <a href="" class="navbar-item">Register</a>
+        <a class="navbar-item" href="{% url 'login' %}">Login</a>
+        <a class="navbar-item" href="{% url 'logout' %}" >Logout</a>
+        <a class="navbar-item" href="{% url 'register' %}">Register</a>
     </div>
 
 
@@ -42,6 +42,28 @@
                 {% csrf_token %}
                 <input type="hidden" name="docid" value="{{ docid }}">
 
+
+                <div class="field is-grouped">
+                        <p class="control is-expanded">
+                            <input class="input" type="text" placeholder="Ieškoti">
+                        </p>
+                        <p class="control">
+                            <a class="button is-info">
+                            Search
+                            </a>
+                        </p>
+                </div>
+
+                <label class="label">Categories</label>
+                <div class="select">
+
+                    <select>
+                        <option>Sportas</option>
+                        <option>Susirinkimas</option>
+                    </select>
+                </div>
+
+
                 <div class="field">
                     <label class="label">
                         Title
@@ -53,6 +75,9 @@
 
                         {% endif %}
                     </label>
+
+
+
                     <div class="control">
                         <input type="text" class="input" name="title" placeholder="Title"{% if document %} value="{{ document.title }}"{% endif %}>
                     </div>
@@ -62,6 +87,19 @@
 
                     <div class="control">
                         <textarea class="textarea" name="content" placeholder="Content"{% if document %}{{ document.content }}{% endif %}></textarea>
+                    </div>
+                    <div class="file">
+                        <label class="file-label">
+                            <input class="file-input" type="file" name="resume">
+                            <span class="file-cta">
+                            <span class="file-icon">
+                                <i class="fas fa-upload"></i>
+                            </span>
+                            <span class="file-label">
+                                Pasirinkite nuotrauką
+                            </span>
+                            </span>
+                        </label>
                     </div>
                 </div>
                 <div class="field is-grouped">
