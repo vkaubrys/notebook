@@ -1,7 +1,7 @@
 from django.urls import path
 
 from . import views
-from .views import delete_document
+from .views import delete_document, register_request
 
 # app_name = "notebook"
 
