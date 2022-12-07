@@ -1,0 +1,16 @@
+{% extends 'index.html' %}
+{% block content %}
+<h1>Paieskos pagal {{query}} rezultatai: </h1>
+{% if category %}
+<ul>
+  {% for category in categories %}
+  <li>
+    <a href="{{category.id}}">{{category.name}}</a>
+  </li>
+  {% endfor %}
+</ul>
+
+{% else %}
+<p>Nieko neradome :( </p>
+{% endif %}
+{% endblock %}

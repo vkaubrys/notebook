@@ -13,6 +13,7 @@
         <a class="navbar-item" href="{% url 'login' %}">Login</a>
         <a class="navbar-item" href="{% url 'logout' %}" >Logout</a>
         <a class="navbar-item" href="{% url 'register' %}">Register</a>
+
     </div>
 
 
@@ -44,8 +45,12 @@
 
 
                 <div class="field is-grouped">
-                        <p class="control is-expanded">
-                            <input class="input" type="text" placeholder="Ieškoti">
+                        <p  class="control is-expanded">
+
+
+                            <input name="query" class="input" type="text" placeholder="Ieškoti">
+
+
                         </p>
                         <p class="control">
                             <a class="button is-info">

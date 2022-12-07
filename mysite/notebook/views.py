@@ -1,6 +1,9 @@
 from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
+from django.db.models import Q
 from django.shortcuts import render, redirect
+from django.views import generic
 from django.views.decorators.csrf import csrf_protect
 from pkg_resources import _
 
@@ -10,7 +13,7 @@ from django.contrib import messages
 
 # Create your views here.
 
-from .models import Document
+from .models import Document, Category
 
 
 def index(request):
@@ -46,6 +49,12 @@ def index(request):
 
     return render(request, 'index.html', context)
 
+class UserNoteCreateView(LoginRequiredMixin, generic.CreateView):
+    model = Document
+    fields = ['title', 'content']
+    success_url = '/my_notes/'
+    template_name = 'notebook/user_note_form.html'
+
 
 def delete_document(request, docid):
     document = Document.objects.get(pk=docid)
@@ -53,6 +62,12 @@ def delete_document(request, docid):
 
     return redirect('/?docid=0')
 
+
+def search(request):
+    query = request.GET.get('query')
+
+    search_results = Category.objects.filter(Q(name__icontains=query)) | Q(description__icontains=query)
+    return render(request, 'notebook/search.html', {'category': search_results, 'query': query})
 
 def register_request(request):
     if request.method == "POST":

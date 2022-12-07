@@ -19,6 +19,25 @@ class Document(models.Model):
     modified_at = models.DateTimeField(auto_now=True)
 
 
+    class Meta:
+        verbose_name_plural = 'Documents'
+
+class User(models.Model):
+    title = models.CharField(max_length=255)
+    first_name = models.CharField(max_length=50)
+    last_name = models.CharField (max_length=50)
+    phone = models.CharField(max_length=10)
+    email=models.EmailField()
+    password = models.CharField(max_length=100)
+
+    class Meta:
+        verbose_name_plural = 'Users'
+
+    # def get_absolute_url(self):
+    #     return reverse()
+
+
+
 
     class Meta:
         ordering = ('title',)
